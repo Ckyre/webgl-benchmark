@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  background-color: white;
 }
 
 canvas {
@@ -10,10 +11,11 @@ canvas {
   display: block;
 }
 
+/* Navigation menu */
 nav {
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 10px;
+  left: 10px;
   display: flex;
   padding: 15px;
   background-color: white;
@@ -28,7 +30,16 @@ nav a {
   display: block;
 }
 
+/* Home page */
+body.home {
+  padding: 100px;
+}
+body.home a {
+  display: block;
+  margin-bottom: 15px;
+}
 
+/* FPS counter */
 #fps {
     font-size: 32px;
 }
