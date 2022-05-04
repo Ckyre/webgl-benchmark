@@ -15,8 +15,8 @@ function main() {
     const scene = new THREE.Scene();
 
     for (let i = 0; i < OBJ_COUNT; i += 1) {
-        const w = randomInt(300);
-        const h = randomInt(300);
+        const w = randomInt(OBJ_MAX_SIZE);
+        const h = randomInt(OBJ_MAX_SIZE);
 
         const geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 

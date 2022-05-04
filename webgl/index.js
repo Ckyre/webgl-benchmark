@@ -52,7 +52,7 @@ function main() {
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
     for (var ii = 0; ii < OBJ_COUNT; ++ii) {
-        setRectangle(gl, randomInt(900), randomInt(500), randomInt(300), randomInt(300));
+        setRectangle(gl, randomInt(900), randomInt(500), randomInt(OBJ_MAX_SIZE), randomInt(OBJ_MAX_SIZE));
         // Set a random color.
         gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
         // Draw
