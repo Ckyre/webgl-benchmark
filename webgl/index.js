@@ -51,7 +51,6 @@ function main() {
     // Resolution uniform
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-    console.log("Creating " + OBJ_COUNT + " objects");
     for (var ii = 0; ii < OBJ_COUNT; ++ii) {
         setRectangle(gl, randomInt(900), randomInt(500), randomInt(300), randomInt(300));
         // Set a random color.
@@ -59,6 +58,7 @@ function main() {
         // Draw
         gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
+    setObjCountText(OBJ_COUNT);
 }
 
 // Fill the buffer with the values that define a rectangle.

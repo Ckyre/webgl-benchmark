@@ -3,11 +3,12 @@ class Scene extends Phaser.Scene {
     }
 
     create() {
-        // Draw 1000 rectangles
-        console.log("Creating " + OBJ_COUNT + " objects");
+
         for (var ii = 0; ii < OBJ_COUNT; ++ii) {
-            this.add.rectangle(randomInt(900), randomInt(500),randomInt(300), randomInt(300), Math.floor(Math.random() * 0xFFFFFF)).setOrigin(0, 0);
+            this.add.rectangle(randomInt(900), randomInt(500),randomInt(300), randomInt(300), randomColor()).setOrigin(0, 0);
         }
+        setObjCountText(OBJ_COUNT);
+
     }
 }
 

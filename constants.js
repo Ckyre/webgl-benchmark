@@ -1,5 +1,4 @@
 const OBJ_COUNT = 2000;
-document.querySelector("#obj-count").innerHTML = OBJ_COUNT + " objects in the scene";
 
 const times = [];
 let fps;
@@ -20,6 +19,15 @@ function startFPSCount() {
     });
 }
 
+function setObjCountText(count) {
+    console.log("Creating " + count + " objects");
+    document.querySelector("#obj-count").innerHTML = count + " objects in the scene";
+}
+
 function randomInt(range) {
     return Math.floor(Math.random() * range);
+}
+
+function randomColor() {
+    return Math.floor(Math.random() * 0xFFFFFF);
 }
