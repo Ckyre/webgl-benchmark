@@ -1,5 +1,5 @@
-const OBJ_COUNT = 5000;
-const OBJ_MAX_SIZE = 100;
+const OBJ_COUNT = 500;
+const OBJ_MAX_SIZE = 1000;
 const OBJ_TEXTURED = false;
 
 // Update navigation UI
