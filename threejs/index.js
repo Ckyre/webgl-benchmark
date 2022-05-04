@@ -14,7 +14,7 @@ function main() {
 
     const scene = new THREE.Scene();
 
-    const textureLoader = new THREE.TextureLoader();
+    const loader = new THREE.TextureLoader();
 
     for (let i = 0; i < OBJ_COUNT; i += 1) {
         const w = randomInt(OBJ_MAX_SIZE);
