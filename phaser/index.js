@@ -13,9 +13,13 @@ class Scene extends Phaser.Scene {
         {
             for (var ii = 0; ii < OBJ_COUNT; ++ii) {    
                 if(ii % 2 === 0) {
-                    this.add.sprite(randomInt(900), randomInt(500), "image1").setScale(0.4);
+                    var sprite = this.add.sprite(randomInt(900), randomInt(500), "image1");
+                    sprite.width = randomInt(OBJ_MAX_SIZE);
+                    sprite.height = randomInt(OBJ_MAX_SIZE);
                 } else {
-                    this.add.sprite(randomInt(900), randomInt(500), "image2").setScale(0.4);
+                    var sprite = this.add.sprite(randomInt(900), randomInt(500), "image2").setScale(0.4);
+                    sprite.width = randomInt(OBJ_MAX_SIZE);
+                    sprite.height = randomInt(OBJ_MAX_SIZE);
                 }
             }
         }
