@@ -20,8 +20,9 @@ function initMenu() {
                 <a href="../phaser">Phaser</a>
                 <a href="../pixi">PIXI</a>
                 </div>
-            <div class="col">
-                <a href="../threejs">THREESJS</a>
+                <div class="col">
+                <a href="../threejs">THREEJS</a>
+                <a href="../Babylon">BABYLON</a>
             </div>
         </div>
         
@@ -63,4 +64,14 @@ function randomInt(range) {
 
 function randomColor() {
     return Math.floor(Math.random() * 0xFFFFFF);
+}
+
+function randomColorString() {
+    let color = "#";
+    const hexCol = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+    for (let i = 0; i < 6; i += 1) {
+        color += hexCol[randomInt(16)];
+    }
+    console.log(color);
+    return color;
 }
