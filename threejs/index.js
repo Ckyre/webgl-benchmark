@@ -14,13 +14,16 @@ function main() {
 
     const scene = new THREE.Scene();
 
+    const textureLoader = new THREE.TextureLoader();
+
     for (let i = 0; i < OBJ_COUNT; i += 1) {
-        const w = randomInt(300);
-        const h = randomInt(300);
+        const w = randomInt(OBJ_MAX_SIZE);
+        const h = randomInt(OBJ_MAX_SIZE);
 
         const geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 
-        const material = new THREE.MeshBasicMaterial({ color: randomColor() });
+        var material = new THREE.MeshBasicMaterial({ color: randomColor() });
+        // var material = new THREE.MeshBasicMaterial({ map: textureLoader.load('https://r105.threejsfundamentals.org/threejs/resources/images/wall.jpg') });
 
         const rect = new THREE.Mesh(geometry, material);
         rect.position.x = randomInt(900) - window.innerWidth / 2 + w;

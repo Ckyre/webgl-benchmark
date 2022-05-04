@@ -1,4 +1,6 @@
-const OBJ_COUNT = 2000;
+const OBJ_COUNT = 500;
+const OBJ_MAX_SIZE = 500;
+const OBJ_TEXTURED = true;
 
 // Update navigation UI
 var fpsText;
@@ -17,11 +19,10 @@ function initMenu() {
                 <a href="../webgl">WebGL</a>
                 <a href="../phaser">Phaser</a>
                 <a href="../pixi">PIXI</a>
+                </div>
+                <div class="col">
                 <a href="../threejs">THREEJS</a>
                 <a href="../Babylon">BABYLON</a>
-            </div>
-            <div class="col">
-            
             </div>
         </div>
         
