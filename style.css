@@ -1,9 +1,10 @@
-@import url("https://webglfundamentals.org/webgl/resources/webgl-tutorials.css");
+/* @import url("https://webglfundamentals.org/webgl/resources/webgl-tutorials.css"); */
 
 body {
   margin: 0;
-  background-color: white;
   overflow: hidden;
+  background-color: white;
+  font-family: Sans-Serif;
 }
 
 canvas {

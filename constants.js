@@ -1,8 +1,30 @@
 const OBJ_COUNT = 2000;
 
+// Update navigation UI
+var fpsText;
+var objectsText;
+
+function initMenu() {
+    document.querySelector("#menu").innerHTML = `
+    <div>
+        <p id="fps">-- FPS</p>
+        <span id="objs">--- objects in scene</span>
+    </div>
+    <div class="links">
+        <p>Others benchmarks</p>
+        <a href="../webgl">WebGL</a>
+        <a href="../phaser">Phaser</a>
+        <a href="../pixi">PIXI</a>
+    </div>
+    `;
+
+    fpsText = document.querySelector("#fps");
+    objectsText = document.querySelector("#objs");
+}
+initMenu();
+
 const times = [];
-let fps;
-var fpsText = document.querySelector("#fps");
+var fps;
 
 function startFPSCount() {
     window.requestAnimationFrame(() => {
@@ -21,9 +43,10 @@ function startFPSCount() {
 
 function setObjCountText(count) {
     console.log("Creating " + count + " objects");
-    document.querySelector("#obj-count").innerHTML = count + " objects in the scene";
+    objectsText.innerHTML = count + " objects in the scene";
 }
 
+// Random
 function randomInt(range) {
     return Math.floor(Math.random() * range);
 }

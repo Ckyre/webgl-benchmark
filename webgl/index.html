@@ -8,27 +8,13 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div>
-            <p id="fps">-- FPS</p>
-            <span id="obj-count">--- objects in scene</span>
-        </div>
-        <div class="links">
-            <p>Others benchmarks</p>
-            <a href="../phaser/">Phaser</a>
-            <a href="../pixi/">PIXI</a>
-        </div>
-    </nav>
-    <!--  -->
+    <nav id="menu"></nav>
 
     <canvas id="canvas"></canvas>
 
     <script src="../constants.js"></script>
-    <script src="index.js" defer></script>
-
-    <!-- vertex shader -->
-    <script  id="vertex-shader-2d" type="x-shader/x-vertex">
+    <!-- Vertex shader -->
+    <script id="vertex-shader-2d" type="x-shader/x-vertex">
         attribute vec2 a_position;
 
         uniform vec2 u_resolution;
@@ -46,7 +32,7 @@
         gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
         }
     </script>
-    <!-- fragment shader -->
+    <!-- Fragment shader -->
     <script  id="fragment-shader-2d" type="x-shader/x-fragment">
         precision mediump float;
 
@@ -57,6 +43,6 @@
         }
     </script>
     <script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
-
+    <script src="index.js" defer></script>
 </body>
 </html>
