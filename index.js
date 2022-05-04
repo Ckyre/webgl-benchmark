@@ -61,10 +61,6 @@ function main() {
     }
 }
 
-function randomInt(range) {
-  return Math.floor(Math.random() * range);
-}
-
 // Fill the buffer with the values that define a rectangle.
 function setRectangle(gl, x, y, width, height) {
   var x1 = x;
@@ -83,23 +79,4 @@ function setRectangle(gl, x, y, width, height) {
 
 main();
 
-const times = [];
-let fps;
-var fpsText = document.querySelector("#fps");
-
-function refreshLoop() {
-  window.requestAnimationFrame(() => {
-    const now = performance.now();
-    while (times.length > 0 && times[0] <= now - 1000) {
-      times.shift();
-    }
-    times.push(now);
-    fps = times.length;
-
-    fpsText.innerHTML = fps + " FPS";
-
-    refreshLoop();
-  });
-}
-
-refreshLoop();
+startFPSCount();

@@ -10,10 +10,25 @@ canvas {
   display: block;
 }
 
+nav {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  display: flex;
+  padding: 15px;
+  background-color: white;
+}
+nav * {
+  margin: 0;
+}
+nav .links {
+  margin-left: 50px;
+}
+nav a {
+  display: block;
+}
+
+
 #fps {
-    position: absolute;
-    top: 0px;
-    left: 50px;
-    color: white;
     font-size: 32px;
 }

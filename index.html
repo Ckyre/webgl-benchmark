@@ -6,12 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benchmark WebGL</title>
     <link rel="stylesheet" href="style.css">
-    <script src="constants.js"></script>
-    <script src="index.js" defer></script>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div>
+            <p id="fps">-- FPS</p>
+            <span id="obj-count">--- objects in scene</span>
+        </div>
+        <div class="links">
+            Autres benchmarks
+            <a href="./phaser/">Phaser</a>
+        </div>
+    </nav>
+    <!--  -->
+
     <canvas id="canvas"></canvas>
-    <p id="fps">-- FPS</p>
+
+    <script src="constants.js"></script>
+    <script src="index.js" defer></script>
 
     <!-- vertex shader -->
     <script  id="vertex-shader-2d" type="x-shader/x-vertex">

@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benchmark Phaser</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="../constants.js"></script>
 </head>
 <body>
-    <p id="fps">-- FPS</p>
-    
+    <!-- Navigation -->
+    <nav>
+        <div>
+            <p id="fps">-- FPS</p>
+            <span id="obj-count">--- objects in scene</span>
+        </div>
+        <div class="links">
+            Autres benchmarks
+            <a href="../">WebGL</a>
+        </div>
+    </nav>
+    <!--  -->
+
+    <script src="../constants.js"></script>
     <script src="phaser.min.js"></script>
     <script src="index.js"></script>
 </body>
