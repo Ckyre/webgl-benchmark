@@ -1,0 +1,1 @@
+const OBJ_COUNT = 2000;

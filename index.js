@@ -51,8 +51,8 @@ function main() {
     // Resolution uniform
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-    // Draw 100 rectangles
-    for (var ii = 0; ii < 1000; ++ii) {
+    console.log("Creating " + OBJ_COUNT + " objects");
+    for (var ii = 0; ii < OBJ_COUNT; ++ii) {
         setRectangle(gl, randomInt(900), randomInt(500), randomInt(300), randomInt(300));
         // Set a random color.
         gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
