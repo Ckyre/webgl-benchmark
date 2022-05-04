@@ -12,9 +12,17 @@ function initMenu() {
     </div>
     <div class="links">
         <p>Others benchmarks</p>
-        <a href="../webgl">WebGL</a>
-        <a href="../phaser">Phaser</a>
-        <a href="../pixi">PIXI</a>
+        <div class="row">
+            <div class="col">
+                <a href="../webgl">WebGL</a>
+                <a href="../phaser">Phaser</a>
+                <a href="../pixi">PIXI</a>
+            </div>
+            <div class="col">
+            
+            </div>
+        </div>
+        
     </div>
     `;
 
