@@ -16,23 +16,54 @@ function main() {
 
     const loader = new THREE.TextureLoader();
 
+    const textures = [
+        loader.load('https://picsum.photos/1920/1080'),
+        loader.load('https://picsum.photos/800/600'),
+    ];
+
+
     for (let i = 0; i < OBJ_COUNT; i += 1) {
         const w = randomInt(OBJ_MAX_SIZE);
         const h = randomInt(OBJ_MAX_SIZE);
+        const l = randomInt(900) - window.innerWidth / 2 + w;
+        const t = randomInt(500) - window.innerHeight / 2 + h;
 
         const geometry = new THREE.PlaneGeometry(w, h, 1, 1);
 
-        var material = new THREE.MeshBasicMaterial({ color: randomColor() });
-        // var material = new THREE.MeshBasicMaterial({ map: textureLoader.load('https://r105.threejsfundamentals.org/threejs/resources/images/wall.jpg') });
+        const material =
+            new THREE.MeshBasicMaterial(OBJ_TEXTURED ? ({ map: textures[randomInt(textures.length)], side: THREE.DoubleSide, }) : { color: randomColor() });
 
         const rect = new THREE.Mesh(geometry, material);
-        rect.position.x = randomInt(900) - window.innerWidth / 2 + w;
-        rect.position.y = randomInt(500) - window.innerHeight / 2 + h;
+        rect.position.x = l;
+        rect.position.y = t;
 
         scene.add(rect);
     }
 
-    renderer.render(scene, camera);
+    function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
+
+    function render(time) {
+        if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
+
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
 }
 
 main();
