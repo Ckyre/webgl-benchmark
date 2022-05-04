@@ -17,6 +17,7 @@ function initMenu() {
                 <a href="../webgl">WebGL</a>
                 <a href="../phaser">Phaser</a>
                 <a href="../pixi">PIXI</a>
+                <a href="../threejs">THREESJS</a>
             </div>
             <div class="col">
             
@@ -38,13 +39,13 @@ function startFPSCount() {
     window.requestAnimationFrame(() => {
         const now = performance.now();
         while (times.length > 0 && times[0] <= now - 1000) {
-          times.shift();
+            times.shift();
         }
         times.push(now);
         fps = times.length;
-    
+
         fpsText.innerHTML = fps + " FPS";
-    
+
         startFPSCount();
     });
 }
