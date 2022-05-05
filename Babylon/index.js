@@ -1,29 +1,84 @@
 setObjCountText(OBJ_COUNT);
 startFPSCount();
 
-
-
-
 function main() {
     // This creates a basic Babylon Scene object (non-mesh)
     const canvas = document.querySelector('canvas');
-    const engine = new BABYLON.Engine(canvas, false);
+    const engine = new BABYLON.Engine(canvas, false, {
+            disableWebGL2Support: true,
+        },
+        true);
     var advancedTexture;
     const images = [];
 
-    
     // Gamepads events
     const gamepadManager = new BABYLON.GamepadManager();
     var gamepad0;
 
-    gamepadManager.onGamepadConnectedObservable.add((gamepad, state)=>{
+    gamepadManager.onGamepadConnectedObservable.add((gamepad, state) => {
         console.log("Gamepad ", gamepad.index, " connected");
         gamepad0 = gamepad;
     });
-    gamepadManager.onGamepadDisconnectedObservable.add((gamepad, state)=>{
+    gamepadManager.onGamepadDisconnectedObservable.add((gamepad, state) => {
         console.log("Gamepad ", gamepad.index, " disconnected");
         gamepad0 = undefined;
     });
+
+    var printSpecs = function() {
+        console.log("webgl ver: " + engine.webGLVersion);
+        console.log("capable of astc ? " + engine.getCaps().astc);
+        console.log("capable of blendMinMax ? " + engine.getCaps().blendMinMax);
+        console.log("capable of bptc ? " + engine.getCaps().bptc);
+        console.log("capable of canUseGLInstanceID ? " + engine.getCaps().canUseGLInstanceID);
+        console.log("capable of canUseGLVertexID ? " + engine.getCaps().canUseGLVertexID);
+        console.log("capable of canUseTimestampForTimerQuery ? " + engine.getCaps().canUseTimestampForTimerQuery);
+        console.log("capable of colorBufferFloat ? " + engine.getCaps().colorBufferFloat);
+        console.log("capable of depthTextureExtension ? " + engine.getCaps().depthTextureExtension);
+        console.log("capable of drawBuffersExtension ? " + engine.getCaps().drawBuffersExtension);
+        console.log("capable of etc1 ? " + engine.getCaps().etc1);
+        console.log("capable of etc2 ? " + engine.getCaps().etc2);
+        console.log("capable of fragmentDepthSupported ? " + engine.getCaps().fragmentDepthSupported);
+        console.log("capable of highPrecisionShaderSupported ? " + engine.getCaps().highPrecisionShaderSupported);
+        console.log("capable of instancedArrays ? " + engine.getCaps().instancedArrays);
+        console.log("capable of maxAnisotropy ? " + engine.getCaps().maxAnisotropy);
+        console.log("capable of maxCombinedTexturesImageUnits ? " + engine.getCaps().maxCombinedTexturesImageUnits);
+        console.log("capable of maxCubemapTextureSize ? " + engine.getCaps().maxCubemapTextureSize);
+        console.log("capable of maxFragmentUniformVectors ? " + engine.getCaps().maxFragmentUniformVectors);
+        console.log("capable of maxMSAASamples ? " + engine.getCaps().maxMSAASamples);
+        console.log("capable of maxRenderTextureSize ? " + engine.getCaps().maxRenderTextureSize);
+        console.log("capable of maxSamples ? " + engine.getCaps().maxSamples);
+        console.log("capable of maxTextureSize ? " + engine.getCaps().maxTextureSize);
+        console.log("capable of maxTexturesImageUnits ? " + engine.getCaps().maxTexturesImageUnits);
+        console.log("capable of maxVaryingVectors ? " + engine.getCaps().maxVaryingVectors);
+        console.log("capable of maxVertexAttribs ? " + engine.getCaps().maxVertexAttribs);
+        console.log("capable of maxVertexTextureImageUnits ? " + engine.getCaps().maxVertexTextureImageUnits);
+        console.log("capable of maxVertexUniformVectors ? " + engine.getCaps().maxVertexUniformVectors);
+        console.log("capable of multiview ? " + engine.getCaps().multiview);
+        console.log("capable of oculusMultiview ? " + engine.getCaps().oculusMultiview);
+        console.log("capable of parallelShaderCompile ? " + engine.getCaps().parallelShaderCompile);
+        console.log("capable of pvrtc ? " + engine.getCaps().pvrtc);
+        console.log("capable of s3tc ? " + engine.getCaps().s3tc);
+        console.log("capable of s3tc_srgb ? " + engine.getCaps().s3tc_srgb);
+        console.log("capable of standardDerivatives ? " + engine.getCaps().standardDerivatives);
+        console.log("capable of supportComputeShaders ? " + engine.getCaps().supportComputeShaders);
+        console.log("capable of supportOcclusionQuery ? " + engine.getCaps().supportOcclusionQuery);
+        console.log("capable of supportSRGBBuffers ? " + engine.getCaps().supportSRGBBuffers);
+        console.log("capable of supportTransformFeedbacks ? " + engine.getCaps().supportTransformFeedbacks);
+        console.log("capable of textureAnisotropicFilterExtension ? " + engine.getCaps().textureAnisotropicFilterExtension);
+        console.log("capable of textureFloat ? " + engine.getCaps().textureFloat);
+        console.log("capable of textureFloatLinearFiltering ? " + engine.getCaps().textureFloatLinearFiltering);
+        console.log("capable of textureFloatRender ? " + engine.getCaps().textureFloatRender);
+        console.log("capable of textureHalfFloat ? " + engine.getCaps().textureHalfFloat);
+        console.log("capable of textureHalfFloatLinearFiltering ? " + engine.getCaps().textureHalfFloatLinearFiltering);
+        console.log("capable of textureHalfFloatRender ? " + engine.getCaps().textureHalfFloatRender);
+        console.log("capable of textureLOD ? " + engine.getCaps().textureLOD);
+        console.log("capable of textureMaxLevel ? " + engine.getCaps().textureMaxLevel);
+        console.log("capable of timerQuery ? " + engine.getCaps().timerQuery);
+        console.log("capable of uintIndices ? " + engine.getCaps().uintIndices);
+        console.log("capable of vertexArrayObject ? " + engine.getCaps().vertexArrayObject);
+    }
+
+    printSpecs();
 
     /**
      * retrieve the list of images
@@ -117,28 +172,6 @@ function main() {
         const btn2 = advancedTexture.getControlByName("Nav_Btn2");
         var display_zone = advancedTexture.getControlByName("DisplayZone");
 
-        // var checkbox = new BABYLON.GUI.Checkbox();
-        // checkbox.width = "20px";
-        // checkbox.height = "20px";
-        // checkbox.isChecked = false;
-        // checkbox.color = "green";
-        // checkbox.onIsCheckedChangedObservable.add(function(value) {
-        //     display_zone.freezeControls = value;
-        //     setbuckets.isEnabled = value;
-        // });
-        // navbar.addControl(checkbox);
-
-        // setbuckets = new BABYLON.GUI.Checkbox();
-        // setbuckets.width = "20px";
-        // setbuckets.height = "20px";
-        // setbuckets.isChecked = false;
-        // setbuckets.isEnabled = false;
-        // setbuckets.color = "green";
-        // setbuckets.onIsCheckedChangedObservable.add(function(value) {
-        //     display_zone.setBucketSizes(value ? 500 : 0, value ? 200 : 0);
-        // });
-        // navbar.addControl(setbuckets);
-
         var stats = new BABYLON.GUI.TextBlock();
         stats.top = "55px";
         stats.left = "-50px";
@@ -149,7 +182,10 @@ function main() {
         stats.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
         stats.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
         stats.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        stats.fontSize = 20;
         stats.color = "white";
+        stats.outlineColor = "black";
+        stats.outlineWidth = 3;
         advancedTexture.addControl(stats);
 
         // btnHome clears the display_zone
@@ -214,25 +250,28 @@ function main() {
         // load the GUI
         loadGui(scene);
 
+
         return scene;
     }
 
     var sceneToRender = createScene();
 
+
     engine.runRenderLoop(function() {
 
-        if(gamepad0 != undefined) {
+        if (gamepad0 != undefined) {
             var values = gamepad0._leftStick;
 
-            if(values.x > 0.1 || values.x < -0.1 || values.y > 0.1 || values.y < -0.1) {
-                if(advancedTexture != undefined) {
+            if (values.x > 0.1 || values.x < -0.1 || values.y > 0.1 || values.y < -0.1) {
+                if (advancedTexture != undefined) {
                     advancedTexture.getControlByName("DisplayZone").verticalBar.value += (values.y / 25);
                 }
             }
         }
-        
+
         sceneToRender.render();
     });
+
 }
 
 main();
