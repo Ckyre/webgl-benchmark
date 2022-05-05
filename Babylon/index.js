@@ -156,6 +156,7 @@ function main() {
                     // fetch all the possible images
                     await fetchImages();
                 }
+                display_zone.freezeControls = false;
                 if (display_zone) {
                     let children = display_zone.getDescendants();
                     children.forEach(child => {
