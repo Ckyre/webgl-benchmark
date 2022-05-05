@@ -27,6 +27,7 @@ function main() {
                         // console.log(element.assets.en.title + " no cover");
                     }
                 });
+                console.log("images count: " + images.length);
             });
     }
 
@@ -37,7 +38,7 @@ function main() {
     var populateView = function(scrollview) {
         if (scrollview != null) {
 
-            scrollview.setBucketSizes(500, 210);
+            // scrollview.setBucketSizes(500, 210);
 
             // Setup the grid
             var gd = new BABYLON.GUI.Grid();
@@ -90,21 +91,54 @@ function main() {
         await advancedTexture.parseFromURLAsync("./guiTexture.json");
         advancedTexture.idealWidth = 1920;
 
-        // fetch all the possible images
-        await fetchImages();
-
         // look for every necessary Control
+        const navbar = advancedTexture.getControlByName("StackPanel");
         const btnHome = advancedTexture.getControlByName("Nav_Home");
         const btn1 = advancedTexture.getControlByName("Nav_Btn1");
         const btn2 = advancedTexture.getControlByName("Nav_Btn2");
         const display_zone = advancedTexture.getControlByName("DisplayZone");
+
+        // var checkbox = new BABYLON.GUI.Checkbox();
+        // checkbox.width = "20px";
+        // checkbox.height = "20px";
+        // checkbox.isChecked = false;
+        // checkbox.color = "green";
+        // checkbox.onIsCheckedChangedObservable.add(function(value) {
+        //     display_zone.freezeControls = value;
+        //     setbuckets.isEnabled = value;
+        // });
+        // navbar.addControl(checkbox);
+
+        // setbuckets = new BABYLON.GUI.Checkbox();
+        // setbuckets.width = "20px";
+        // setbuckets.height = "20px";
+        // setbuckets.isChecked = false;
+        // setbuckets.isEnabled = false;
+        // setbuckets.color = "green";
+        // setbuckets.onIsCheckedChangedObservable.add(function(value) {
+        //     display_zone.setBucketSizes(value ? 500 : 0, value ? 200 : 0);
+        // });
+        // navbar.addControl(setbuckets);
+
+        var stats = new BABYLON.GUI.TextBlock();
+        stats.top = "55px";
+        stats.left = "-50px";
+        stats.text = "";
+        stats.width = "500px";
+        stats.marginLeft = "5px";
+        stats.horizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        stats.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        stats.textHorizontalAlignment = BABYLON.GUI.Control.HORIZONTAL_ALIGNMENT_RIGHT;
+        stats.textVerticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP;
+        stats.color = "white";
+        advancedTexture.addControl(stats);
 
         // btnHome clears the display_zone
         if (btnHome != null) {
             btnHome.onPointerClickObservable.add(function() {
                 console.log("click home");
                 if (display_zone) {
-                    display_zone.freezeControlls = false;
+                    display_zone.freezeControls = false;
                     display_zone.setBucketSizes(0, 0);
                     let children = display_zone.getDescendants();
                     children.forEach(child => {
@@ -116,8 +150,12 @@ function main() {
 
         // btn1 clears then repopulate the display_zone
         if (btn1 != null) {
-            btn1.onPointerClickObservable.add(function() {
+            btn1.onPointerClickObservable.add(async function() {
                 console.log("click btn1");
+                if (images.length == 0) {
+                    // fetch all the possible images
+                    await fetchImages();
+                }
                 if (display_zone) {
                     let children = display_zone.getDescendants();
                     children.forEach(child => {
@@ -125,11 +163,15 @@ function main() {
                     });
                 }
                 populateView(display_zone);
-                display_zone.freezeControlls = true;
+                display_zone.freezeControls = true;
             });
         }
 
         scene.onBeforeRenderObservable.add(() => advancedTexture.markAsDirty()); // make sure the GUI is redrawn continously
+
+        scene.onAfterRenderObservable.add(() => {
+            stats.text = advancedTexture.numLayoutCalls + " layout calls\n" + advancedTexture.numRenderCalls + " render calls";
+        });
     }
 
 
