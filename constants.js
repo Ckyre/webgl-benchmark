@@ -1,4 +1,4 @@
-const OBJ_COUNT = 500;
+const OBJ_COUNT = 4;
 const OBJ_MAX_SIZE = 500;
 const OBJ_TEXTURED = true;
 const BABYLON_IMG_URL = "https://assets.babylon.gamestream.biz/";
