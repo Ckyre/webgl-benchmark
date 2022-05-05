@@ -1,6 +1,7 @@
 const OBJ_COUNT = 500;
 const OBJ_MAX_SIZE = 500;
 const OBJ_TEXTURED = true;
+const BABYLON_IMG_URL = "https://assets.babylon.gamestream.biz/";
 
 // Update navigation UI
 var fpsText;
@@ -72,6 +73,5 @@ function randomColorString() {
     for (let i = 0; i < 6; i += 1) {
         color += hexCol[randomInt(16)];
     }
-    console.log(color);
     return color;
 }

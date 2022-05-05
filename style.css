@@ -1,53 +1,65 @@
 /* @import url("https://webglfundamentals.org/webgl/resources/webgl-tutorials.css"); */
 
 body {
-  margin: 0;
-  overflow: hidden;
-  background-color: white;
-  font-family: Sans-Serif;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
+    font-family: Sans-Serif;
 }
 
 canvas {
-  width: 100vw;
-  height: 100vh;
-  display: block;
+    width: 100vw;
+    height: 100vh;
+    display: block;
 }
+
 
 /* Navigation menu */
+
 nav {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  padding: 15px;
-  background-color: white;
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    display: flex;
+    padding: 15px;
+    background-color: white;
 }
+
 nav * {
-  margin: 0;
+    margin: 0;
 }
+
 nav .links {
-  margin-left: 50px;
+    margin-left: 50px;
 }
+
 nav .links .row {
-  display: flex;
+    display: flex;
 }
+
 nav .links .row .col:not(:first-child) {
-  margin-left: 25px;
+    margin-left: 25px;
 }
+
 nav a {
-  display: block;
+    display: block;
 }
+
 
 /* Home page */
+
 body.home {
-  padding: 100px;
-}
-body.home a {
-  display: block;
-  margin-bottom: 15px;
+    padding: 100px;
 }
 
+body.home a {
+    display: block;
+    margin-bottom: 15px;
+}
+
+
 /* FPS counter */
+
 #fps {
     font-size: 32px;
 }
