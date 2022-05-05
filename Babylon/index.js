@@ -62,6 +62,7 @@ function main() {
                 // select rect texture
                 if (OBJ_TEXTURED) {
                     rect = new BABYLON.GUI.Image("" + i, BABYLON_IMG_URL + images[randomInt(images.length)]);
+                    rect.stretch = BABYLON.GUI.Image.STRETCH_UNIFORM;
                 } else {
                     rect = new BABYLON.GUI.Rectangle("" + i);
                     rect.background = randomColorString();
