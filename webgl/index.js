@@ -1,10 +1,12 @@
 "use strict";
 
+var gl;
+
 function main() {
     // Get WebGL context
     /** @type {HTMLCanvasElement} */
     var canvas = document.querySelector("#canvas");
-    var gl = canvas.getContext("webgl");
+    gl = canvas.getContext("webgl");
     if (!gl) {
         return;
     }
@@ -50,31 +52,37 @@ function main() {
 
     // Resolution uniform
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+    gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
 
-    for (var ii = 0; ii < OBJ_COUNT; ++ii) {
-        setRectangle(gl, randomInt(900), randomInt(500), randomInt(OBJ_MAX_SIZE), randomInt(OBJ_MAX_SIZE));
-        // Set a random color.
-        gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
-        // Draw
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-    }
-    setObjCountText(OBJ_COUNT);
+    // setObjCountText(OBJ_COUNT);
+    loop(gl);
+}
+
+var x = 0;
+
+function loop() {
+    setRectangle(gl, x, 250, 500, 500);
+    x = Math.cos(Date.now() / 100) * 100 + 200;
+    // Draw
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    window.setTimeout(loop, 1000 / 60);
 }
 
 // Fill the buffer with the values that define a rectangle.
 function setRectangle(gl, x, y, width, height) {
-  var x1 = x;
-  var x2 = x + width;
-  var y1 = y;
-  var y2 = y + height;
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-     x1, y1,
-     x2, y1,
-     x1, y2,
-     x1, y2,
-     x2, y1,
-     x2, y2,
-  ]), gl.STATIC_DRAW);
+    var x1 = x;
+    var x2 = x + width;
+    var y1 = y;
+    var y2 = y + height;
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        x1, y1,
+        x2, y1,
+        x1, y2,
+        x1, y2,
+        x2, y1,
+        x2, y2,
+    ]), gl.STATIC_DRAW);
 }
 
 main();
