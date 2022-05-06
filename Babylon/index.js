@@ -24,61 +24,83 @@ function main() {
         gamepad0 = undefined;
     });
 
-    var printSpecs = function() {
-        console.log("webgl ver: " + engine.webGLVersion);
-        console.log("capable of astc ? " + engine.getCaps().astc);
-        console.log("capable of blendMinMax ? " + engine.getCaps().blendMinMax);
-        console.log("capable of bptc ? " + engine.getCaps().bptc);
-        console.log("capable of canUseGLInstanceID ? " + engine.getCaps().canUseGLInstanceID);
-        console.log("capable of canUseGLVertexID ? " + engine.getCaps().canUseGLVertexID);
-        console.log("capable of canUseTimestampForTimerQuery ? " + engine.getCaps().canUseTimestampForTimerQuery);
-        console.log("capable of colorBufferFloat ? " + engine.getCaps().colorBufferFloat);
-        console.log("capable of depthTextureExtension ? " + engine.getCaps().depthTextureExtension);
-        console.log("capable of drawBuffersExtension ? " + engine.getCaps().drawBuffersExtension);
-        console.log("capable of etc1 ? " + engine.getCaps().etc1);
-        console.log("capable of etc2 ? " + engine.getCaps().etc2);
-        console.log("capable of fragmentDepthSupported ? " + engine.getCaps().fragmentDepthSupported);
-        console.log("capable of highPrecisionShaderSupported ? " + engine.getCaps().highPrecisionShaderSupported);
-        console.log("capable of instancedArrays ? " + engine.getCaps().instancedArrays);
-        console.log("capable of maxAnisotropy ? " + engine.getCaps().maxAnisotropy);
-        console.log("capable of maxCombinedTexturesImageUnits ? " + engine.getCaps().maxCombinedTexturesImageUnits);
-        console.log("capable of maxCubemapTextureSize ? " + engine.getCaps().maxCubemapTextureSize);
-        console.log("capable of maxFragmentUniformVectors ? " + engine.getCaps().maxFragmentUniformVectors);
-        console.log("capable of maxMSAASamples ? " + engine.getCaps().maxMSAASamples);
-        console.log("capable of maxRenderTextureSize ? " + engine.getCaps().maxRenderTextureSize);
-        console.log("capable of maxSamples ? " + engine.getCaps().maxSamples);
-        console.log("capable of maxTextureSize ? " + engine.getCaps().maxTextureSize);
-        console.log("capable of maxTexturesImageUnits ? " + engine.getCaps().maxTexturesImageUnits);
-        console.log("capable of maxVaryingVectors ? " + engine.getCaps().maxVaryingVectors);
-        console.log("capable of maxVertexAttribs ? " + engine.getCaps().maxVertexAttribs);
-        console.log("capable of maxVertexTextureImageUnits ? " + engine.getCaps().maxVertexTextureImageUnits);
-        console.log("capable of maxVertexUniformVectors ? " + engine.getCaps().maxVertexUniformVectors);
-        console.log("capable of multiview ? " + engine.getCaps().multiview);
-        console.log("capable of oculusMultiview ? " + engine.getCaps().oculusMultiview);
-        console.log("capable of parallelShaderCompile ? " + engine.getCaps().parallelShaderCompile);
-        console.log("capable of pvrtc ? " + engine.getCaps().pvrtc);
-        console.log("capable of s3tc ? " + engine.getCaps().s3tc);
-        console.log("capable of s3tc_srgb ? " + engine.getCaps().s3tc_srgb);
-        console.log("capable of standardDerivatives ? " + engine.getCaps().standardDerivatives);
-        console.log("capable of supportComputeShaders ? " + engine.getCaps().supportComputeShaders);
-        console.log("capable of supportOcclusionQuery ? " + engine.getCaps().supportOcclusionQuery);
-        console.log("capable of supportSRGBBuffers ? " + engine.getCaps().supportSRGBBuffers);
-        console.log("capable of supportTransformFeedbacks ? " + engine.getCaps().supportTransformFeedbacks);
-        console.log("capable of textureAnisotropicFilterExtension ? " + engine.getCaps().textureAnisotropicFilterExtension);
-        console.log("capable of textureFloat ? " + engine.getCaps().textureFloat);
-        console.log("capable of textureFloatLinearFiltering ? " + engine.getCaps().textureFloatLinearFiltering);
-        console.log("capable of textureFloatRender ? " + engine.getCaps().textureFloatRender);
-        console.log("capable of textureHalfFloat ? " + engine.getCaps().textureHalfFloat);
-        console.log("capable of textureHalfFloatLinearFiltering ? " + engine.getCaps().textureHalfFloatLinearFiltering);
-        console.log("capable of textureHalfFloatRender ? " + engine.getCaps().textureHalfFloatRender);
-        console.log("capable of textureLOD ? " + engine.getCaps().textureLOD);
-        console.log("capable of textureMaxLevel ? " + engine.getCaps().textureMaxLevel);
-        console.log("capable of timerQuery ? " + engine.getCaps().timerQuery);
-        console.log("capable of uintIndices ? " + engine.getCaps().uintIndices);
-        console.log("capable of vertexArrayObject ? " + engine.getCaps().vertexArrayObject);
+    function addSpecToGui(container, title, content) {
+        const title_txt = new BABYLON.GUI.TextBlock();
+        title_txt.width = 1;
+        title_txt.height = "30px";
+        title_txt.textWrapping = true;
+        title_txt.text = title;
+
+        const content_txt = new BABYLON.GUI.TextBlock();
+        content_txt.width = 1;
+        content_txt.height = "40px";
+        title_txt.textWrapping = true;
+        content_txt.text = content;
+
+        const separator = new BABYLON.GUI.Rectangle("");
+        separator.background = randomColorString();
+        separator.thickness = 0;
+        separator.width = 1;
+        separator.height = "2px";
+
+        container.addControl(title_txt);
+        container.addControl(content_txt);
+        container.addControl(separator);
     }
 
-    printSpecs();
+    function addSpecsToGui(container) {
+        addSpecToGui(container, "webgl ver: ", engine.webGLVersion);
+        addSpecToGui(container, "astc", engine.getCaps().astc);
+        addSpecToGui(container, "blendMinMax", engine.getCaps().blendMinMax);
+        addSpecToGui(container, "bptc", engine.getCaps().bptc);
+        addSpecToGui(container, "canUseGLInstanceID", engine.getCaps().canUseGLInstanceID);
+        addSpecToGui(container, "canUseGLVertexID", engine.getCaps().canUseGLVertexID);
+        addSpecToGui(container, "canUseTimestampForTimerQuery", engine.getCaps().canUseTimestampForTimerQuery);
+        addSpecToGui(container, "colorBufferFloat", engine.getCaps().colorBufferFloat);
+        addSpecToGui(container, "depthTextureExtension", engine.getCaps().depthTextureExtension);
+        addSpecToGui(container, "drawBuffersExtension", engine.getCaps().drawBuffersExtension);
+        addSpecToGui(container, "etc1", engine.getCaps().etc1);
+        addSpecToGui(container, "etc2", engine.getCaps().etc2);
+        addSpecToGui(container, "fragmentDepthSupported", engine.getCaps().fragmentDepthSupported);
+        addSpecToGui(container, "highPrecisionShaderSupported", engine.getCaps().highPrecisionShaderSupported);
+        addSpecToGui(container, "instancedArrays", engine.getCaps().instancedArrays);
+        addSpecToGui(container, "maxAnisotropy", engine.getCaps().maxAnisotropy);
+        addSpecToGui(container, "maxCombinedTexturesImageUnits", engine.getCaps().maxCombinedTexturesImageUnits);
+        addSpecToGui(container, "maxCubemapTextureSize", engine.getCaps().maxCubemapTextureSize);
+        addSpecToGui(container, "maxFragmentUniformVectors", engine.getCaps().maxFragmentUniformVectors);
+        addSpecToGui(container, "maxMSAASamples", engine.getCaps().maxMSAASamples);
+        addSpecToGui(container, "maxRenderTextureSize", engine.getCaps().maxRenderTextureSize);
+        addSpecToGui(container, "maxSamples", engine.getCaps().maxSamples);
+        addSpecToGui(container, "maxTextureSize", engine.getCaps().maxTextureSize);
+        addSpecToGui(container, "maxTexturesImageUnits", engine.getCaps().maxTexturesImageUnits);
+        addSpecToGui(container, "maxVaryingVectors", engine.getCaps().maxVaryingVectors);
+        addSpecToGui(container, "maxVertexAttribs", engine.getCaps().maxVertexAttribs);
+        addSpecToGui(container, "maxVertexTextureImageUnits", engine.getCaps().maxVertexTextureImageUnits);
+        addSpecToGui(container, "maxVertexUniformVectors", engine.getCaps().maxVertexUniformVectors);
+        addSpecToGui(container, "multiview", engine.getCaps().multiview);
+        addSpecToGui(container, "oculusMultiview", engine.getCaps().oculusMultiview);
+        addSpecToGui(container, "parallelShaderCompile", engine.getCaps().parallelShaderCompile);
+        addSpecToGui(container, "pvrtc", engine.getCaps().pvrtc);
+        addSpecToGui(container, "s3tc", engine.getCaps().s3tc);
+        addSpecToGui(container, "s3tc_srgb", engine.getCaps().s3tc_srgb);
+        addSpecToGui(container, "standardDerivatives", engine.getCaps().standardDerivatives);
+        addSpecToGui(container, "supportComputeShaders", engine.getCaps().supportComputeShaders);
+        addSpecToGui(container, "supportOcclusionQuery", engine.getCaps().supportOcclusionQuery);
+        addSpecToGui(container, "supportSRGBBuffers", engine.getCaps().supportSRGBBuffers);
+        addSpecToGui(container, "supportTransformFeedbacks", engine.getCaps().supportTransformFeedbacks);
+        addSpecToGui(container, "textureAnisotropicFilterExtension", engine.getCaps().textureAnisotropicFilterExtension);
+        addSpecToGui(container, "textureFloat", engine.getCaps().textureFloat);
+        addSpecToGui(container, "textureFloatLinearFiltering", engine.getCaps().textureFloatLinearFiltering);
+        addSpecToGui(container, "textureFloatRender", engine.getCaps().textureFloatRender);
+        addSpecToGui(container, "textureHalfFloat", engine.getCaps().textureHalfFloat);
+        addSpecToGui(container, "textureHalfFloatLinearFiltering", engine.getCaps().textureHalfFloatLinearFiltering);
+        addSpecToGui(container, "textureHalfFloatRender", engine.getCaps().textureHalfFloatRender);
+        addSpecToGui(container, "textureLOD", engine.getCaps().textureLOD);
+        addSpecToGui(container, "textureMaxLevel", engine.getCaps().textureMaxLevel);
+        addSpecToGui(container, "timerQuery", engine.getCaps().timerQuery);
+        addSpecToGui(container, "uintIndices", engine.getCaps().uintIndices);
+        addSpecToGui(container, "vertexArrayObject", engine.getCaps().vertexArrayObject);
+    }
 
     /**
      * retrieve the list of images
@@ -96,7 +118,7 @@ function main() {
                             images.push(pic);
                         }
                     } catch (error) {
-                        // console.log(element.assets.en.title + " no cover");
+                        // console.log(element.assets.en.title , " no cover");
                     }
                 });
                 console.log("images count: " + images.length);
@@ -109,7 +131,6 @@ function main() {
      */
     var populateView = function(scrollview) {
         if (scrollview != null) {
-
 
             // scrollview.setBucketSizes(500, 210);
 
@@ -162,7 +183,7 @@ function main() {
     async function loadGui(scene) {
         // load the GUI from file
         advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI");
-        await advancedTexture.parseFromURLAsync("./guiTexture.json");
+        await advancedTexture.parseFromURLAsync("./Layouts/guiTexture.json");
         advancedTexture.idealWidth = 1920;
 
         // look for every necessary Control
@@ -170,7 +191,18 @@ function main() {
         const btnHome = advancedTexture.getControlByName("Nav_Home");
         const btn1 = advancedTexture.getControlByName("Nav_Btn1");
         const btn2 = advancedTexture.getControlByName("Nav_Btn2");
-        var display_zone = advancedTexture.getControlByName("DisplayZone");
+        const display_zone = advancedTexture.getControlByName("DisplayZone");
+
+
+        const navcaps = advancedTexture.getControlByName("InspectorEngineNavigatorStack");
+
+        if (navcaps != null) {
+            advancedTexture.getControlByName("InspectorScrollview").freezeControls = false;
+            addSpecsToGui(navcaps);
+            advancedTexture.getControlByName("InspectorScrollview").freezeControls = true;
+        } else {
+            console.log("no inspector");
+        }
 
         var stats = new BABYLON.GUI.TextBlock();
         stats.top = "55px";
@@ -211,15 +243,15 @@ function main() {
                     // fetch all the possible images
                     await fetchImages();
                 }
-                display_zone.freezeControls = false;
                 if (display_zone) {
+                    display_zone.freezeControls = false;
                     let children = display_zone.getDescendants();
                     children.forEach(child => {
                         child.dispose();
                     });
+                    populateView(display_zone);
+                    display_zone.freezeControls = true;
                 }
-                populateView(display_zone);
-                display_zone.freezeControls = true;
             });
         }
 
