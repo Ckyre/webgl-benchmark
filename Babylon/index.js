@@ -2,11 +2,28 @@ setObjCountText(OBJ_COUNT);
 startFPSCount();
 
 
+
+
 function main() {
     // This creates a basic Babylon Scene object (non-mesh)
     const canvas = document.querySelector('canvas');
     const engine = new BABYLON.Engine(canvas, false);
+    var advancedTexture;
     const images = [];
+
+    
+    // Gamepads events
+    const gamepadManager = new BABYLON.GamepadManager();
+    var gamepad0;
+
+    gamepadManager.onGamepadConnectedObservable.add((gamepad, state)=>{
+        console.log("Gamepad ", gamepad.index, " connected");
+        gamepad0 = gamepad;
+    });
+    gamepadManager.onGamepadDisconnectedObservable.add((gamepad, state)=>{
+        console.log("Gamepad ", gamepad.index, " disconnected");
+        gamepad0 = undefined;
+    });
 
     /**
      * retrieve the list of images
@@ -37,6 +54,7 @@ function main() {
      */
     var populateView = function(scrollview) {
         if (scrollview != null) {
+
 
             // scrollview.setBucketSizes(500, 210);
 
@@ -88,7 +106,7 @@ function main() {
      */
     async function loadGui(scene) {
         // load the GUI from file
-        const advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI");
+        advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("myUI");
         await advancedTexture.parseFromURLAsync("./guiTexture.json");
         advancedTexture.idealWidth = 1920;
 
@@ -97,7 +115,7 @@ function main() {
         const btnHome = advancedTexture.getControlByName("Nav_Home");
         const btn1 = advancedTexture.getControlByName("Nav_Btn1");
         const btn2 = advancedTexture.getControlByName("Nav_Btn2");
-        const display_zone = advancedTexture.getControlByName("DisplayZone");
+        var display_zone = advancedTexture.getControlByName("DisplayZone");
 
         // var checkbox = new BABYLON.GUI.Checkbox();
         // checkbox.width = "20px";
@@ -202,6 +220,18 @@ function main() {
     var sceneToRender = createScene();
 
     engine.runRenderLoop(function() {
+
+        if(gamepad0 != undefined)
+        {
+            var values = gamepad0._leftStick;
+
+            if(values.x > 0.1 || values.x < -0.1 || values.y > 0.1 || values.y < -0.1) {
+                if(advancedTexture != undefined) {
+                    advancedTexture.getControlByName("DisplayZone").verticalBar.value += (values.y / 25);
+                }
+            }
+        }
+        
         sceneToRender.render();
     });
 }
