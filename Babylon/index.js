@@ -221,8 +221,7 @@ function main() {
 
     engine.runRenderLoop(function() {
 
-        if(gamepad0 != undefined)
-        {
+        if(gamepad0 != undefined) {
             var values = gamepad0._leftStick;
 
             if(values.x > 0.1 || values.x < -0.1 || values.y > 0.1 || values.y < -0.1) {
